@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
@@ -66,17 +66,18 @@ const images = [
   },
 ]
 
-export default function GalleryItem({ params }: { params: { id: string } }) {
+export default function GalleryItem({ params }: { params: Promise<{ id: string }> }) {
   const [image, setImage] = useState<(typeof images)[0] | null>(null)
-
+  const { id } = use(params);
+  
   useEffect(() => {
-    const foundImage = images.find((img) => img.id === params.id)
+    const foundImage = images.find((img) => img.id === id)
     if (foundImage) {
       setImage(foundImage)
     } else {
       notFound()
     }
-  }, [params.id])
+  }, [id])
 
   if (!image) {
     return null // or a loading spinner
