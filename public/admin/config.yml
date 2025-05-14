@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: master
+media_folder: public/assets/images/uploads
+public_folder: assets/images/uploads
+collections:
+  - name: "galleries"
+    label: "Gallery"
+    folder: "_contents/gallery"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "galleries" }
+      - { label: "Alt", name: "alt", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Src", name: "src", widget: "image" }
+      - { label: "Description", name: "description", widget: "markdown" }
