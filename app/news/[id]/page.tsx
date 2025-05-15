@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
-import Link from "next/link"
+import Link from "next/link";
+import { use } from 'react';
 
 // This would typically come from a database or API
 const newsItems = [
@@ -23,8 +24,9 @@ const newsItems = [
   },
 ]
 
-export default function NewsItem({ params }: { params: { id: string } }) {
-  const newsItem = newsItems.find((item) => item.id === params.id)
+export default function NewsItem({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
+  const newsItem = newsItems.find((item) => item.id === id)
 
   if (!newsItem) {
     notFound()
@@ -32,13 +34,16 @@ export default function NewsItem({ params }: { params: { id: string } }) {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-primary-600 mb-4">{newsItem.title}</h1>
-        <p className="text-gray-700 mb-6">{newsItem.content}</p>
-        <Link href="/" className="text-secondary-600 hover:text-secondary-700 transition-colors">
-          &larr; Back to Home
-        </Link>
-      </div>
+      {
+        newsItem &&
+          <div className="max-w-2xl mx-auto">
+            <h1 className="text-3xl font-bold text-primary-600 mb-4">{newsItem.title}</h1>
+            <p className="text-gray-700 mb-6">{newsItem.content}</p>
+            <Link href="/" className="text-secondary-600 hover:text-secondary-700 transition-colors">
+              &larr; Back to Home
+            </Link>
+          </div>
+      }
     </div>
   )
 }
