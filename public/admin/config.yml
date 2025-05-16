@@ -2,7 +2,7 @@ backend:
   name: github
   repo: sulenchy/school-website
   branch: main
-  
+
 media_folder: public/assets/images/uploads
 public_folder: assets/images/uploads
 collections:
