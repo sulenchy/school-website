@@ -9,7 +9,7 @@ collections:
   - name: "galleries"
     label: "Gallery"
     folder: "_contents/gallery"
-    create: true
+    create: false
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "galleries" }
