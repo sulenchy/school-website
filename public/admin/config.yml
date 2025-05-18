@@ -10,7 +10,8 @@ collections:
   - name: "galleries"
     label: "Gallery"
     folder: "_contents/gallery"
-    create: false
+    create: true
+    delete: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "galleries" }
@@ -21,7 +22,8 @@ collections:
   - name: "news"
     label: "News"
     folder: "_contents/news"
-    create: false
+    create: true
+    delete: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "news" }
