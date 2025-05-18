@@ -36,7 +36,7 @@ collections:
 
   - name: "posts"
     label: "Posts"
-    folder: "content/posts/"
+    folder: "_content/posts/"
     extension: "mdx"
     format: "frontmatter"
     create: true
