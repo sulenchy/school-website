@@ -12,7 +12,8 @@ collections:
     folder: "_contents/gallery"
     create: true
     delete: true
-    extension: "json-frontmatter"
+    extension: "json"
+    format: "json-frontmatter"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "galleries" }
