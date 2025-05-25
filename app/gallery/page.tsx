@@ -354,7 +354,7 @@ export default function GalleryPage() {
               )}
               {searchQuery.trim() && (
                 <span className="inline-flex items-center gap-1 px-3 py-1 bg-secondary-100 text-secondary-600 rounded-full text-sm">
-                  Search: "{searchQuery}"
+                  Search: &quot;{searchQuery}&quot;
                   <button
                     onClick={() => setSearchQuery("")}
                     className="ml-1 hover:text-secondary-800"
