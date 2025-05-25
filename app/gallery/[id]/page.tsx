@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
@@ -40,21 +40,22 @@ const images = [
   // Add more images as needed...
 ]
 
-export default function GalleryItem({ params }: { params: { id: string } }) {
+export default function GalleryItem({ params }: { params: Promise<{ id: string }> }) {
+  const {id } = use(params)
   const [image, setImage] = useState<(typeof images)[0] | null>(null)
   const [relatedImages, setRelatedImages] = useState<typeof images>([])
 
   useEffect(() => {
-    const foundImage = images.find((img) => img.id === params.id)
+    const foundImage = images.find((img) => img.id === id)
     if (foundImage) {
       setImage(foundImage)
       // Get related images from the same category
-      const related = images.filter((img) => img.id !== params.id && img.category === foundImage.category).slice(0, 4)
+      const related = images.filter((img) => img.id !== id && img.category === foundImage.category).slice(0, 4)
       setRelatedImages(related)
     } else {
       notFound()
     }
-  }, [params.id])
+  }, [id])
 
   if (!image) {
     return (
