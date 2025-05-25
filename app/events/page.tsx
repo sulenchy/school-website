@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from 'next/image'
 import { motion } from "framer-motion"
 
 // This would typically come from a database or API
@@ -229,7 +230,7 @@ export default function EventsPage() {
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-primary-200"
                 >
                   <div className="relative h-48 bg-gray-200">
-                    <img
+                    <image
                       src={event.image || "/placeholder.svg"}
                       alt={event.title}
                       className="w-full h-full object-cover"
@@ -365,7 +366,7 @@ export default function EventsPage() {
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 >
                   <div className="relative h-48 bg-gray-200">
-                    <img
+                    <Image
                       src={event.image || "/placeholder.svg"}
                       alt={event.title}
                       className="w-full h-full object-cover"
@@ -417,7 +418,7 @@ export default function EventsPage() {
                 >
                   <div className="flex flex-col md:flex-row gap-4">
                     <div className="md:w-48 h-32 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                      <img
+                      <Image
                         src={event.image || "/placeholder.svg"}
                         alt={event.title}
                         className="w-full h-full object-cover"

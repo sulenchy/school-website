@@ -455,7 +455,7 @@ export default function GalleryPage() {
                     onClick={() => setSelectedImage(image.id)}
                   >
                     <div className="relative">
-                      <img
+                      <Image
                         src={image.src || "/placeholder.svg"}
                         alt={image.alt}
                         className="w-full h-auto transition-transform duration-300 group-hover:scale-105"

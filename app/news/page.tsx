@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from 'next/image'
 import { motion } from "framer-motion"
 
 // This would typically come from a database or API
@@ -166,7 +167,7 @@ export default function NewsPage() {
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
               <div className="relative h-48 bg-gray-200">
-                <img
+                <Image
                   src={article.image || "/placeholder.svg"}
                   alt={article.title}
                   className="w-full h-full object-cover"
