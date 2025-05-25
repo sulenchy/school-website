@@ -205,7 +205,7 @@ export default function EventsPage() {
             className="text-center"
           >
             <h1 className="text-4xl font-bold text-primary-600 mb-4">School Events</h1>
-            <p className="text-xl text-secondary-600">Discover upcoming events and activities at Acme School</p>
+            <p className="text-xl text-secondary-600">Discover upcoming events and activities at MCHS</p>
           </motion.div>
         </div>
       </section>

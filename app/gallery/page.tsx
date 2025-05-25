@@ -217,7 +217,7 @@ export default function GalleryPage() {
             className="text-center"
           >
             <h1 className="text-4xl font-bold text-primary-600 mb-4">School Gallery</h1>
-            <p className="text-xl text-secondary-600">Explore moments and memories from Acme School</p>
+            <p className="text-xl text-secondary-600">Explore moments and memories from MCHS</p>
           </motion.div>
         </div>
       </section>

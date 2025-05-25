@@ -121,7 +121,7 @@ export default function NewsPage() {
             className="text-center"
           >
             <h1 className="text-4xl font-bold text-primary-600 mb-4">School News</h1>
-            <p className="text-xl text-secondary-600">Stay updated with the latest happenings at Acme School</p>
+            <p className="text-xl text-secondary-600">Stay updated with the latest happenings at MCHS</p>
           </motion.div>
         </div>
       </section>
