@@ -230,7 +230,7 @@ export default function EventsPage() {
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-2 border-primary-200"
                 >
                   <div className="relative h-48 bg-gray-200">
-                    <image
+                    <Image
                       src={event.image || "/placeholder.svg"}
                       alt={event.title}
                       className="w-full h-full object-cover"
