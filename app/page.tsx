@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Slideshow from "./components/Slideshow"
 
 const newsItems = [
   { id: "1", title: "New STEM program launching next semester" },
@@ -9,6 +10,10 @@ const newsItems = [
 export default function Home() {
   return (
     <div className="space-y-12">
+      <section>
+        <Slideshow />
+      </section>
+
       <section className="text-center bg-gradient-to-r from-primary-100 to-secondary-100 p-12 rounded-lg">
         <h1 className="text-4xl font-bold mb-4 text-primary-600">Welcome to MCHS</h1>
         <p className="text-xl text-secondary-600">Perseverance wins the success</p>
@@ -25,6 +30,11 @@ export default function Home() {
             </li>
           ))}
         </ul>
+        <div>
+            <Link href="/" className="text-secondary-600 hover:text-secondary-700 transition-colors">
+            More News &rarr;
+            </Link>
+        </div>
       </section>
 
       <section>
