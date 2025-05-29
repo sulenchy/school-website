@@ -1,9 +1,17 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
+
+type GalleryItem = {
+  title: string;
+  src: string;
+  description: string;
+  date: string;
+  slug: string;
+};
 
 const images = [
   {
@@ -110,12 +118,25 @@ const images = [
 const categories = ["All", "Campus", "Academics", "Facilities", "Sports", "Arts", "Events"]
 
 export default function GalleryPage() {
+  // const items = getGalleryItems();
+  const [items, setItems] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [viewMode, setViewMode] = useState<"grid" | "masonry">("grid")
   const [sortBy, setSortBy] = useState<"date" | "title" | "category">("date")
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
+
+  useEffect(() => {
+    fetch('/api/gallery')
+      .then((res) => res.json())
+      .then((data) => {
+        setItems(data);
+        console.log("===> ", {data});
+        setLoading(false);
+      });
+  }, []);
 
   // Filter and search functionality
   const filteredImages = useMemo(() => {
@@ -408,7 +429,7 @@ export default function GalleryPage() {
                   >
                     <div className="relative aspect-square overflow-hidden">
                       <Image
-                        src={image.src || "/placeholder.svg"}
+                        src={items.length && `/${items[0].src}` || "/placeholder.svg"}
                         alt={image.alt}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-110"

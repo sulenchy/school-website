@@ -15,17 +15,17 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "/assets/images/uploads/whatsapp-image-2024-12-22-at-2.26.40-pm-1-.jpeg",
     title: "Welcome to Moslem Comprehensive High School",
     subtitle: "Perseverance wins the success",
     description: "Empowering minds and shaping futures since 1950",
   },
   {
     id: 2,
-    image: "/placeholder.svg?height=600&width=1200",
-    title: "STEM Innovation Program",
-    subtitle: "Future-Ready Learning",
-    description: "Preparing students for tomorrow's challenges with cutting-edge technology",
+    image: "/assets/images/uploads/whatsapp-image-2025-05-28-at-7.03.24-pm.jpeg",
+    title: "MOSCOSA National Body",
+    subtitle: "",
+    description: "At the meeting held few days to the 70th Anniversary",
   },
   {
     id: 3,

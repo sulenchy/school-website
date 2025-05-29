@@ -18,9 +18,14 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "galleries" }
       - { label: "Alt", name: "alt", widget: "string" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Photographer", name: "photographer", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Src", name: "src", widget: "image" }
       - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["school"] }
+
   - name: "news"
     label: "News"
     folder: "_contents/news"
@@ -33,5 +38,27 @@ collections:
       - { label: "Layout", name: "layout", widget: "hidden", default: "news" }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Src", name: "src", widget: "image" }
+      - { label: "Image", name: "image", widget: "image" }
       - { label: "Content", name: "content", widget: "markdown" }
+      - { label: "Excerpt", name: "excerpt", widget: "string" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Author", name: "author", widget: "string" }
+  - name: "events"
+    label: "Events"
+    folder: "_contents/events"
+    create: true
+    delete: true
+    extension: "json"
+    format: "json-frontmatter"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "news" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Full Description", name: "fullDescription", widget: "markdown" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Price", name: "price", widget: "string", default: "Free" }
+      - { label: "Organizer", name: "organizer", widget: "string" }
+      - { label: "Status", name: "status", widget: "select", options: ["past", "upcoming"]}
+      - { label: "Featured", name: "featured", widget: "boolean", default: true }
