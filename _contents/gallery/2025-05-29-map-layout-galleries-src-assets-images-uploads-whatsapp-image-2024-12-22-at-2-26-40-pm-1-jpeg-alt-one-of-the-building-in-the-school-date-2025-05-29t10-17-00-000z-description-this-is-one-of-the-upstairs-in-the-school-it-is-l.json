@@ -1,7 +1,13 @@
 {
-"layout": "galleries",
-  "src": "assets/images/uploads/whatsapp-image-2024-12-22-at-2.26.40-pm-1-.jpeg",
+"src": "assets/images/uploads/whatsapp-image-2024-12-22-at-2.26.40-pm-1-.jpeg",
+  "photographer": "The Principal",
   "alt": "One of the building in the school",
+  "layout": "galleries",
   "date": "2025-05-29T10:17:00.000Z",
-  "description": "This is one of the upstairs in the school. It is located in the senior school section of the school"
+  "title": "One of the building in the school",
+  "tags": [
+    "building"
+  ],
+  "description": "This is one of the upstairs in the school. It is located in the senior school section of the school",
+  "category": "building"
 }
