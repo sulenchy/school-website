@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
@@ -18,9 +18,11 @@ export function useFetch<T>(url: string) {
           setData(json);
           setError(null);
         }
-      } catch (err: any) {
-        if (isMounted) {
+      } catch (err: unknown) {
+        if (err instanceof Error) {
           setError(err.message);
+        } else {
+          setError("An unknown error occurred");
         }
       } finally {
         if (isMounted) setLoading(false);
