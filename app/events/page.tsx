@@ -269,7 +269,7 @@ export default function EventsPage() {
                     <p className="text-gray-600 mb-3 line-clamp-2">{event.description}</p>
                     <div className="text-sm text-gray-500 mb-4">
                       <p>{formatDate(event.date)}</p>
-                      <p>{event.time}</p>
+                      {/* <p>{event.time}</p> */}
                       <p>{event.location}</p>
                     </div>
                     <div className="flex justify-between items-center">
@@ -323,7 +323,7 @@ export default function EventsPage() {
                       <p className="text-gray-600 mb-3">{event.description}</p>
                       <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-3">
                         <span>{formatDate(event.date)}</span>
-                        <span>{event.time}</span>
+                        {/* <span>{event.time}</span> */}
                         <span>{event.location}</span>
                         <span className="font-medium text-primary-600">{event.price}</span>
                       </div>
