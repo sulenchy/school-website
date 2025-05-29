@@ -3,15 +3,6 @@ import Link from "next/link"
 import Slideshow from "./components/Slideshow"
 import { useState, useEffect } from "react"
 
-const newsItems = [
-  { id: "1", title: "New STEM program launching next semester" },
-  { id: "2", title: "Annual school carnival scheduled for June 15th" },
-  { id: "3", title: "Parent-teacher conferences start next week" },
-]
-
-const eventItems = [
-  {}
-]
 type NewsItem = {
   title: string;
   excerpt:string;
@@ -30,10 +21,8 @@ export default function Home() {
     fetch('/api/news')
       .then((res) => res.json())
       .then((data) => {
-        const arr = [];
-        data.length >= 3 ?
-          setItems([data[0], data[1], data[2]]) : 
-          setItems(data);
+        const processedData = data.length >= 3 ? [data[0], data[1], data[2]] : setItems(data);
+        setItems(processedData || []);
       });
   }, []);
   return (
