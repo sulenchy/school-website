@@ -1,7 +1,13 @@
 {
-"layout": "galleries",
-  "date": "2025-05-29T10:07:00.000Z",
+"src": "assets/images/uploads/whatsapp-image-2025-05-28-at-7.03.23-pm.jpeg",
+  "photographer": "Abi",
   "alt": "National body MOSCOSA Meeting",
-  "src": "assets/images/uploads/whatsapp-image-2025-05-28-at-7.03.24-pm.jpeg",
-  "description": "Captured at the National Moscosa Meeting on May 28, 2025."
+  "layout": "galleries",
+  "date": "2025-05-29T10:07:00.000Z",
+  "title": "National body MOSCOSA Meeting",
+  "tags": [
+    "events"
+  ],
+  "description": "Captured at the National Moscosa Meeting on May 28, 2025.",
+  "category": "events"
 }
