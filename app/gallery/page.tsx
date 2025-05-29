@@ -35,7 +35,6 @@ export default function GalleryPage() {
       .then((res) => res.json())
       .then((data) => {
         setItems(data);
-        console.log("===> ", {data});
         setLoading(false);
       });
   }, []);
@@ -308,7 +307,7 @@ export default function GalleryPage() {
         </motion.div>
 
         {/* Gallery Grid */}
-        <motion.div
+        {!loading && <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
@@ -380,8 +379,10 @@ export default function GalleryPage() {
                   >
                     <div className="relative">
                       <Image
-                        src={image.src || "/placeholder.svg"}
+                        src={`/${image.src}`|| "/placeholder.svg"}
                         alt={image.alt}
+                        width={800}
+                        height={600}
                         className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300" />
@@ -430,7 +431,7 @@ export default function GalleryPage() {
               </button>
             </div>
           )}
-        </motion.div>
+        </motion.div>}
 
         {/* Image Modal */}
         <AnimatePresence>

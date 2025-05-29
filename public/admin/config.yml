@@ -18,7 +18,7 @@ collections:
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "galleries" }
       - { label: "Alt", name: "alt", widget: "string" }
-      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["All", "Campus", "Academics", "Facilities", "Sports", "Arts", "Events"] }
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Photographer", name: "photographer", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
@@ -41,7 +41,7 @@ collections:
       - { label: "Image", name: "image", widget: "image" }
       - { label: "Content", name: "content", widget: "markdown" }
       - { label: "Excerpt", name: "excerpt", widget: "string" }
-      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["All", "Academic", "Events", "Achievement", "Facilities", "Sports"] }
       - { label: "Author", name: "author", widget: "string" }
   - name: "events"
     label: "Events"

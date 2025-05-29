@@ -1,5 +1,7 @@
+"use client"
 import Link from "next/link"
 import Slideshow from "./components/Slideshow"
+import { useState, useEffect } from "react"
 
 const newsItems = [
   { id: "1", title: "New STEM program launching next semester" },
@@ -10,8 +12,30 @@ const newsItems = [
 const eventItems = [
   {}
 ]
+type NewsItem = {
+  title: string;
+  excerpt:string;
+  content: string;
+  date: string;
+  category: string;
+  image: string;
+  author: string;
+  slug: string;
+}
 
 export default function Home() {
+  const [items, setItems] = useState<NewsItem[]>([]);
+
+  useEffect(() => {
+    fetch('/api/news')
+      .then((res) => res.json())
+      .then((data) => {
+        const arr = [];
+        data.length >= 3 ?
+          setItems([data[0], data[1], data[2]]) : 
+          setItems(data);
+      });
+  }, []);
   return (
     <div className="space-y-12">
       <section>
@@ -26,9 +50,9 @@ export default function Home() {
       <section className="bg-white p-8 rounded-lg shadow-lg border border-primary-200">
         <h2 className="text-2xl font-semibold mb-4 text-primary-600">Latest News</h2>
         <ul className="list-disc list-inside text-gray-700">
-          {newsItems.map((item) => (
-            <li key={item.id} className="mb-2">
-              <Link href={`/news/${item.id}`} className="text-secondary-600 hover:text-secondary-700 transition-colors">
+          {items.map((item) => (
+            <li key={item.slug} className="mb-2">
+              <Link href={`/news/${item.slug}`} className="text-secondary-600 hover:text-secondary-700 transition-colors">
                 {item.title}
               </Link>
             </li>

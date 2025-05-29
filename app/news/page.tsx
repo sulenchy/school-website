@@ -1,93 +1,40 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from 'next/image'
 import { motion } from "framer-motion"
 
-// This would typically come from a database or API
-const newsArticles = [
-  {
-    id: "1",
-    title: "New STEM program launching next semester",
-    excerpt:
-      "We are excited to announce the launch of our new STEM program, which will provide students with hands-on experience in science, technology, engineering, and mathematics.",
-    content:
-      "We are excited to announce the launch of our new STEM program, which will provide students with hands-on experience in science, technology, engineering, and mathematics. This program aims to prepare our students for the challenges of the future workforce. The program will include state-of-the-art laboratories, coding workshops, robotics clubs, and partnerships with local tech companies. Students will have the opportunity to work on real-world projects and develop critical thinking skills that will serve them well in their future careers.",
-    date: "2024-01-15",
-    category: "Academic",
-    image: "/placeholder.svg?height=300&width=500",
-    author: "Dr. Sarah Johnson",
-  },
-  {
-    id: "2",
-    title: "Annual school carnival scheduled for June 15th",
-    excerpt:
-      "Mark your calendars! Our annual school carnival is set for June 15th. This year's event promises to be bigger and better than ever.",
-    content:
-      "Mark your calendars! Our annual school carnival is set for June 15th. This year's event promises to be bigger and better than ever, with new rides, games, and food options. All proceeds will go towards improving our school facilities. We'll have live music performances by our school band, art exhibitions by our talented students, and various food stalls run by parent volunteers. The carnival will run from 10 AM to 6 PM and admission is free for all families.",
-    date: "2024-01-10",
-    category: "Events",
-    image: "/placeholder.svg?height=300&width=500",
-    author: "Events Committee",
-  },
-  {
-    id: "3",
-    title: "Parent-teacher conferences start next week",
-    excerpt:
-      "Parent-teacher conferences will begin next week. These meetings are crucial for discussing your child's progress and setting goals.",
-    content:
-      "Parent-teacher conferences will begin next week. These meetings are crucial for discussing your child's progress and setting goals for the rest of the academic year. Please check your email for scheduling information. Conferences will be held both in-person and virtually to accommodate all families. Each session will last 15 minutes, and parents will receive a detailed progress report. We encourage all parents to attend these important meetings to stay informed about their child's academic journey.",
-    date: "2024-01-08",
-    category: "Academic",
-    image: "/placeholder.svg?height=300&width=500",
-    author: "Administration",
-  },
-  {
-    id: "4",
-    title: "School wins regional science competition",
-    excerpt:
-      "Our science team has won first place in the regional science competition, beating 15 other schools in the district.",
-    content:
-      "Our science team has won first place in the regional science competition, beating 15 other schools in the district. The team, consisting of students from grades 9-12, presented their project on renewable energy solutions. Their innovative approach to solar panel efficiency impressed the judges and earned them a $5,000 grant for the school's science department. We are incredibly proud of their hard work and dedication. The team will now advance to the state competition in March.",
-    date: "2024-01-05",
-    category: "Achievement",
-    image: "/placeholder.svg?height=300&width=500",
-    author: "Science Department",
-  },
-  {
-    id: "5",
-    title: "New library renovation completed",
-    excerpt:
-      "After months of renovation, our school library has been completely transformed with modern facilities and technology.",
-    content:
-      "After months of renovation, our school library has been completely transformed with modern facilities and technology. The new library features comfortable reading areas, collaborative study spaces, and state-of-the-art computer stations. We've also expanded our digital collection and added maker spaces for creative projects. The library now includes a quiet study zone, group discussion rooms, and a presentation area for student projects. All students and staff are invited to explore the new facilities during the grand reopening ceremony next Friday.",
-    date: "2024-01-03",
-    category: "Facilities",
-    image: "/placeholder.svg?height=300&width=500",
-    author: "Facilities Management",
-  },
-  {
-    id: "6",
-    title: "Winter sports season kicks off",
-    excerpt:
-      "Our winter sports teams are ready for action! Basketball, wrestling, and swimming teams begin their competitive seasons this month.",
-    content:
-      "Our winter sports teams are ready for action! Basketball, wrestling, and swimming teams begin their competitive seasons this month. The basketball teams have been training hard and are excited to defend their championship title from last year. Our wrestling team has several new members who show great promise, and the swimming team has been breaking school records in practice. Come out and support our athletes at their upcoming games and meets. The schedule is available on our athletics page.",
-    date: "2024-01-01",
-    category: "Sports",
-    image: "/placeholder.svg?height=300&width=500",
-    author: "Athletics Department",
-  },
-]
+type NewsItem = {
+    title: string;
+    excerpt:string;
+    content: string;
+    date: string;
+    category: string;
+    image: string;
+    author: string;
+    slug: string;
+}
 
 const categories = ["All", "Academic", "Events", "Achievement", "Facilities", "Sports"]
 
 export default function NewsPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All")
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [items, setItems] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/news')
+      .then((res) => res.json())
+      .then((data) => {
+        setItems(data);
+        console.log({data})
+        setLoading(false);
+      });
+  }, []);
 
   const filteredNews =
-    selectedCategory === "All" ? newsArticles : newsArticles.filter((article) => article.category === selectedCategory)
+    selectedCategory === "All" ? items : items.filter((article) => article.category === selectedCategory)
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -152,7 +99,7 @@ export default function NewsPage() {
         </motion.div>
 
         {/* News Grid */}
-        <motion.div
+        { !loading && <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -160,7 +107,7 @@ export default function NewsPage() {
         >
           {filteredNews.map((article, index) => (
             <motion.article
-              key={article.id}
+              key={article.slug}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -168,7 +115,7 @@ export default function NewsPage() {
             >
               <div className="relative h-48 bg-gray-200">
                 <Image
-                  src={article.image || "/placeholder.svg"}
+                  src={`/${article.image}` || "/placeholder.svg"}
                   alt={article.title}
                   className="w-full h-full object-cover"
                   width={1200}
@@ -193,7 +140,7 @@ export default function NewsPage() {
                 <p className="text-gray-600 mb-4 line-clamp-3">{article.excerpt}</p>
 
                 <Link
-                  href={`/news/${article.id}`}
+                  href={`/news/${article.slug}`}
                   className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200"
                 >
                   Read More
@@ -204,7 +151,7 @@ export default function NewsPage() {
               </div>
             </motion.article>
           ))}
-        </motion.div>
+        </motion.div> }
 
         {/* No Results */}
         {filteredNews.length === 0 && (

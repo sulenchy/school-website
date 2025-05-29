@@ -21,3 +21,9 @@ export function loadJsonContent(subPath: string) {
 
   return items;
 }
+
+export function loadJsonContentBySlug(folder: string, slug: string) {
+    const filePath = path.join(process.cwd(), folder, `${slug}.json`);
+    const content = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(content);
+  }
