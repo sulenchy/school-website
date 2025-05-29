@@ -26,6 +26,8 @@ collections:
     folder: "_contents/news"
     create: true
     delete: true
+    extension: "json"
+    format: "json-frontmatter"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Layout", name: "layout", widget: "hidden", default: "news" }
@@ -33,29 +35,3 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Src", name: "src", widget: "image" }
       - { label: "Content", name: "content", widget: "markdown" }
-
-  - name: "posts"
-    label: "Posts"
-    folder: "_content/posts/"
-    extension: "mdx"
-    format: "frontmatter"
-    create: true
-    slug: "{{slug}}"
-    identifier_field: slug
-    summary: "{{title}}"
-    fields:
-      - label: "Slug"
-        name: "slug"
-        widget: "string"
-      - label: "Title"
-        name: "title"
-        widget: "string"
-      - label: "Publish Date"
-        name: "date"
-        widget: "datetime"
-        format: "YYYY-MM-DD"
-        dateFormat: "YYYY-MM-DD"
-        timeFormat: false
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
