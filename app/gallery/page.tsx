@@ -501,7 +501,7 @@ export default function GalleryPage() {
                         </div>
                         <div className="mt-4 flex gap-2">
                           <Link
-                            href={`/gallery/${image.id}`}
+                            href={`/gallery/${image.slug}`}
                             className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
                           >
                             View Details
