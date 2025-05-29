@@ -6,6 +6,11 @@ import { loadJsonContentBySlug } from '../../lib/loadJsonContent';
 import CopyLinkButton from "@/app/components/CopyLinkButton";
 import SocialMediaShareLinkButton from "@/app/components/SocialMediaShareLinkButton";
 
+type Item = {
+  time: string;
+  activity: string
+}
+
 export default function EventDetail({ params }: { params: Promise< {id: string} > }) {
   const { id } = use(params);
   const event = loadJsonContentBySlug('_contents/events', id)
@@ -84,7 +89,7 @@ export default function EventDetail({ params }: { params: Promise< {id: string} 
         <div className="lg:col-span-2">
           <div className="prose prose-lg max-w-none mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Event</h2>
-            {event.fullDescription.split("\n").map((paragraph, index) => (
+            {event.fullDescription.split("\n").map((paragraph : string, index : number) => (
               <p key={index} className="mb-4 text-gray-700 leading-relaxed">
                 {paragraph}
               </p>
@@ -97,7 +102,7 @@ export default function EventDetail({ params }: { params: Promise< {id: string} 
               <h3 className="text-xl font-bold text-gray-900 mb-4">Event Schedule</h3>
               <div className="bg-gray-50 rounded-lg p-6">
                 <div className="space-y-3">
-                  {event.schedule.map((item, index) => (
+                  {event.schedule.map((item : Item, index : number) => (
                     <div key={index} className="flex items-center gap-4">
                       <span className="font-medium text-primary-600 w-20">{item.time}</span>
                       <span className="text-gray-700">{item.activity}</span>
@@ -113,7 +118,7 @@ export default function EventDetail({ params }: { params: Promise< {id: string} 
             <div className="mb-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Requirements & Information</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
-                {event.requirements.map((requirement, index) => (
+                {event.requirements.map((requirement : string, index : number) => (
                   <li key={index}>{requirement}</li>
                 ))}
               </ul>
