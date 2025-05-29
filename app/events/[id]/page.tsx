@@ -135,7 +135,7 @@ export default function EventDetail({ params }: { params: Promise< {id: string} 
               <div>
                 <h4 className="font-medium text-gray-900">Date & Time</h4>
                 <p className="text-gray-600">{formatDate(event.date)}</p>
-                <p className="text-gray-600">{event.time}</p>
+                {/* <p className="text-gray-600">{event.time}</p> */}
               </div>
 
               <div>

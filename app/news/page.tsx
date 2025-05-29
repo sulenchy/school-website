@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from 'next/image'
 import { motion } from "framer-motion"
+import { formatDate } from "@/app/lib/utils";
 
 type NewsItem = {
     title: string;
@@ -36,14 +37,14 @@ export default function NewsPage() {
   const filteredNews =
     selectedCategory === "All" ? items : items.filter((article) => article.category === selectedCategory)
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
-  }
+  // const formatDate = (dateString: string) => {
+  //   const date = new Date(dateString)
+  //   return date.toLocaleDateString("en-US", {
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "numeric",
+  //   })
+  // }
 
   const getCategoryColor = (category: string) => {
     const colors = {
