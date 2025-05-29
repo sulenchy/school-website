@@ -1,157 +1,172 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from 'next/image'
 import { motion } from "framer-motion"
 
+type EventItem = {
+    title: string;
+    description: string;
+    fullDescription: string;
+    date: string;
+    location: string;
+    category: string;
+    image: string;
+    organizer: string;
+    price: string;
+    status: string;
+    slug: string;
+    featured: boolean;
+}
+
 // This would typically come from a database or API
-const events = [
-  {
-    id: "1",
-    title: "Science Fair 2024",
-    description: "Annual science fair showcasing student projects and innovations in STEM fields.",
-    fullDescription:
-      "Join us for our annual Science Fair where students from all grades will showcase their innovative projects and experiments. This year's theme focuses on sustainability and environmental solutions. Judges from local universities and tech companies will evaluate projects and award prizes in various categories.",
-    date: "2024-05-20",
-    time: "9:00 AM - 3:00 PM",
-    location: "Main Gymnasium",
-    category: "Academic",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "Science Department",
-    capacity: 500,
-    registered: 234,
-    price: "Free",
-    status: "upcoming",
-    featured: true,
-  },
-  {
-    id: "2",
-    title: "Spring Sports Day",
-    description: "Annual sports competition featuring track and field events, team sports, and fun activities.",
-    fullDescription:
-      "Our annual Spring Sports Day brings together students, families, and staff for a day of athletic competition and fun. Events include track and field competitions, relay races, team sports tournaments, and family-friendly activities. Food trucks and refreshments will be available throughout the day.",
-    date: "2024-06-05",
-    time: "8:00 AM - 4:00 PM",
-    location: "Athletic Fields",
-    category: "Sports",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "Athletics Department",
-    capacity: 800,
-    registered: 456,
-    price: "Free",
-    status: "upcoming",
-    featured: true,
-  },
-  {
-    id: "3",
-    title: "Art Exhibition Opening",
-    description: "Showcase of student artwork from all grade levels featuring paintings, sculptures, and digital art.",
-    fullDescription:
-      "Celebrate the creativity of our talented students at the annual Art Exhibition. This year's exhibition features over 200 pieces including paintings, sculptures, photography, and digital art. The opening reception will include live music, refreshments, and artist talks by our student creators.",
-    date: "2024-06-12",
-    time: "6:00 PM - 8:00 PM",
-    location: "Art Gallery",
-    category: "Arts",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "Art Department",
-    capacity: 200,
-    registered: 89,
-    price: "Free",
-    status: "upcoming",
-    featured: false,
-  },
-  {
-    id: "4",
-    title: "Annual School Carnival",
-    description: "Fun-filled carnival with rides, games, food trucks, and entertainment for the whole family.",
-    fullDescription:
-      "Mark your calendars for our biggest event of the year! The Annual School Carnival features carnival rides, game booths, food trucks, live entertainment, and much more. All proceeds support school programs and facility improvements. Volunteer opportunities are available for families who want to help make this event a success.",
-    date: "2024-06-15",
-    time: "10:00 AM - 6:00 PM",
-    location: "School Grounds",
-    category: "Community",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "PTA",
-    capacity: 1000,
-    registered: 678,
-    price: "Free admission, pay per activity",
-    status: "upcoming",
-    featured: true,
-  },
-  {
-    id: "5",
-    title: "Graduation Ceremony",
-    description: "Commencement ceremony celebrating our graduating class of 2024.",
-    fullDescription:
-      "Join us as we celebrate the achievements of our graduating class of 2024. The ceremony will feature speeches from valedictorian and salutatorian, presentation of diplomas, and special recognition for outstanding achievements. A reception will follow the ceremony.",
-    date: "2024-06-20",
-    time: "7:00 PM - 9:00 PM",
-    location: "Main Auditorium",
-    category: "Academic",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "Administration",
-    capacity: 600,
-    registered: 600,
-    price: "Free (invitation only)",
-    status: "upcoming",
-    featured: true,
-  },
-  {
-    id: "6",
-    title: "Parent-Teacher Conference",
-    description: "Individual meetings between parents and teachers to discuss student progress.",
-    fullDescription:
-      "Schedule your individual meeting with your child's teachers to discuss academic progress, goals, and any concerns. Both in-person and virtual meetings are available. Please check your email for scheduling instructions and available time slots.",
-    date: "2024-04-15",
-    time: "3:00 PM - 8:00 PM",
-    location: "Classrooms",
-    category: "Academic",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "Administration",
-    capacity: 300,
-    registered: 287,
-    price: "Free",
-    status: "past",
-    featured: false,
-  },
-  {
-    id: "7",
-    title: "Winter Concert",
-    description: "Musical performances by school band, choir, and orchestra.",
-    fullDescription:
-      "Enjoy an evening of beautiful music performed by our talented students. The Winter Concert features performances by the school band, choir, and orchestra, showcasing classical pieces, contemporary songs, and holiday favorites.",
-    date: "2024-03-10",
-    time: "7:00 PM - 9:00 PM",
-    location: "Main Auditorium",
-    category: "Arts",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "Music Department",
-    capacity: 400,
-    registered: 380,
-    price: "Free",
-    status: "past",
-    featured: false,
-  },
-  {
-    id: "8",
-    title: "STEM Workshop Series",
-    description: "Hands-on workshops covering robotics, coding, and engineering for students and parents.",
-    fullDescription:
-      "Join our monthly STEM Workshop Series designed for students and their families. This month's workshop focuses on robotics and programming. Participants will learn basic coding concepts and build simple robots. All materials provided. No prior experience necessary.",
-    date: "2024-05-25",
-    time: "10:00 AM - 12:00 PM",
-    location: "Computer Lab",
-    category: "Academic",
-    image: "/placeholder.svg?height=300&width=500",
-    organizer: "STEM Department",
-    capacity: 30,
-    registered: 28,
-    price: "$10 per family",
-    status: "upcoming",
-    featured: false,
-  },
-]
+// const events = [
+//   {
+//     id: "1",
+//     title: "Science Fair 2024",
+//     description: "Annual science fair showcasing student projects and innovations in STEM fields.",
+//     fullDescription:
+//       "Join us for our annual Science Fair where students from all grades will showcase their innovative projects and experiments. This year's theme focuses on sustainability and environmental solutions. Judges from local universities and tech companies will evaluate projects and award prizes in various categories.",
+//     date: "2024-05-20",
+//     time: "9:00 AM - 3:00 PM",
+//     location: "Main Gymnasium",
+//     category: "Academic",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "Science Department",
+//     capacity: 500,
+//     registered: 234,
+//     price: "Free",
+//     status: "upcoming",
+//     featured: true,
+//   },
+//   {
+//     id: "2",
+//     title: "Spring Sports Day",
+//     description: "Annual sports competition featuring track and field events, team sports, and fun activities.",
+//     fullDescription:
+//       "Our annual Spring Sports Day brings together students, families, and staff for a day of athletic competition and fun. Events include track and field competitions, relay races, team sports tournaments, and family-friendly activities. Food trucks and refreshments will be available throughout the day.",
+//     date: "2024-06-05",
+//     time: "8:00 AM - 4:00 PM",
+//     location: "Athletic Fields",
+//     category: "Sports",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "Athletics Department",
+//     capacity: 800,
+//     registered: 456,
+//     price: "Free",
+//     status: "upcoming",
+//     featured: true,
+//   },
+//   {
+//     id: "3",
+//     title: "Art Exhibition Opening",
+//     description: "Showcase of student artwork from all grade levels featuring paintings, sculptures, and digital art.",
+//     fullDescription:
+//       "Celebrate the creativity of our talented students at the annual Art Exhibition. This year's exhibition features over 200 pieces including paintings, sculptures, photography, and digital art. The opening reception will include live music, refreshments, and artist talks by our student creators.",
+//     date: "2024-06-12",
+//     time: "6:00 PM - 8:00 PM",
+//     location: "Art Gallery",
+//     category: "Arts",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "Art Department",
+//     capacity: 200,
+//     registered: 89,
+//     price: "Free",
+//     status: "upcoming",
+//     featured: false,
+//   },
+//   {
+//     id: "4",
+//     title: "Annual School Carnival",
+//     description: "Fun-filled carnival with rides, games, food trucks, and entertainment for the whole family.",
+//     fullDescription:
+//       "Mark your calendars for our biggest event of the year! The Annual School Carnival features carnival rides, game booths, food trucks, live entertainment, and much more. All proceeds support school programs and facility improvements. Volunteer opportunities are available for families who want to help make this event a success.",
+//     date: "2024-06-15",
+//     time: "10:00 AM - 6:00 PM",
+//     location: "School Grounds",
+//     category: "Community",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "PTA",
+//     capacity: 1000,
+//     registered: 678,
+//     price: "Free admission, pay per activity",
+//     status: "upcoming",
+//     featured: true,
+//   },
+//   {
+//     id: "5",
+//     title: "Graduation Ceremony",
+//     description: "Commencement ceremony celebrating our graduating class of 2024.",
+//     fullDescription:
+//       "Join us as we celebrate the achievements of our graduating class of 2024. The ceremony will feature speeches from valedictorian and salutatorian, presentation of diplomas, and special recognition for outstanding achievements. A reception will follow the ceremony.",
+//     date: "2024-06-20",
+//     time: "7:00 PM - 9:00 PM",
+//     location: "Main Auditorium",
+//     category: "Academic",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "Administration",
+//     capacity: 600,
+//     registered: 600,
+//     price: "Free (invitation only)",
+//     status: "upcoming",
+//     featured: true,
+//   },
+//   {
+//     id: "6",
+//     title: "Parent-Teacher Conference",
+//     description: "Individual meetings between parents and teachers to discuss student progress.",
+//     fullDescription:
+//       "Schedule your individual meeting with your child's teachers to discuss academic progress, goals, and any concerns. Both in-person and virtual meetings are available. Please check your email for scheduling instructions and available time slots.",
+//     date: "2024-04-15",
+//     time: "3:00 PM - 8:00 PM",
+//     location: "Classrooms",
+//     category: "Academic",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "Administration",
+//     capacity: 300,
+//     registered: 287,
+//     price: "Free",
+//     status: "past",
+//     featured: false,
+//   },
+//   {
+//     id: "7",
+//     title: "Winter Concert",
+//     description: "Musical performances by school band, choir, and orchestra.",
+//     fullDescription:
+//       "Enjoy an evening of beautiful music performed by our talented students. The Winter Concert features performances by the school band, choir, and orchestra, showcasing classical pieces, contemporary songs, and holiday favorites.",
+//     date: "2024-03-10",
+//     time: "7:00 PM - 9:00 PM",
+//     location: "Main Auditorium",
+//     category: "Arts",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "Music Department",
+//     capacity: 400,
+//     registered: 380,
+//     price: "Free",
+//     status: "past",
+//     featured: false,
+//   },
+//   {
+//     id: "8",
+//     title: "STEM Workshop Series",
+//     description: "Hands-on workshops covering robotics, coding, and engineering for students and parents.",
+//     fullDescription:
+//       "Join our monthly STEM Workshop Series designed for students and their families. This month's workshop focuses on robotics and programming. Participants will learn basic coding concepts and build simple robots. All materials provided. No prior experience necessary.",
+//     date: "2024-05-25",
+//     time: "10:00 AM - 12:00 PM",
+//     location: "Computer Lab",
+//     category: "Academic",
+//     image: "/placeholder.svg?height=300&width=500",
+//     organizer: "STEM Department",
+//     capacity: 30,
+//     registered: 28,
+//     price: "$10 per family",
+//     status: "upcoming",
+//     featured: false,
+//   },
+// ]
 
 const categories = ["All", "Academic", "Sports", "Arts", "Community"]
 const statusFilters = ["All", "Upcoming", "Past"]
@@ -160,6 +175,17 @@ export default function EventsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedStatus, setSelectedStatus] = useState("All")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+  const [events, setEvents] = useState<EventItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/events')
+      .then((res) => res.json())
+      .then((data) => {
+        setEvents(data);
+        setLoading(false);
+      });
+  }, []);
 
   const filteredEvents = events.filter((event) => {
     const categoryMatch = selectedCategory === "All" || event.category === selectedCategory
@@ -223,7 +249,7 @@ export default function EventsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredEvents.slice(0, 3).map((event, index) => (
                 <motion.div
-                  key={event.id}
+                  key={event.slug}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -231,7 +257,7 @@ export default function EventsPage() {
                 >
                   <div className="relative h-48 bg-gray-200">
                     <Image
-                      src={event.image || "/placeholder.svg"}
+                      src={`/${event.image}` || "/placeholder.svg"}
                       alt={event.title}
                       className="w-full h-full object-cover"
                       width={500}
@@ -258,11 +284,11 @@ export default function EventsPage() {
                     <p className="text-gray-600 mb-3 line-clamp-2">{event.description}</p>
                     <div className="text-sm text-gray-500 mb-4">
                       <p>{formatDate(event.date)}</p>
-                      <p>{event.time}</p>
+                      {/* <p>{event.time}</p> */}
                       <p>{event.location}</p>
                     </div>
                     <Link
-                      href={`/events/${event.id}`}
+                      href={`/events/${event.slug}`}
                       className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200"
                     >
                       Learn More
@@ -361,7 +387,7 @@ export default function EventsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredEvents.map((event, index) => (
                 <motion.div
-                  key={event.id}
+                  key={event.slug}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -369,7 +395,7 @@ export default function EventsPage() {
                 >
                   <div className="relative h-48 bg-gray-200">
                     <Image
-                      src={event.image || "/placeholder.svg"}
+                      src={`/${event.image}` || "/placeholder.svg"}
                       alt={event.title}
                       className="w-full h-full object-cover"
                       width={500}
@@ -397,7 +423,7 @@ export default function EventsPage() {
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium text-primary-600">{event.price}</span>
                       <Link
-                        href={`/events/${event.id}`}
+                        href={`/events/${event.slug}`}
                         className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200"
                       >
                         Details
@@ -414,7 +440,7 @@ export default function EventsPage() {
             <div className="space-y-4">
               {filteredEvents.map((event, index) => (
                 <motion.div
-                  key={event.id}
+                  key={event.slug}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -423,7 +449,7 @@ export default function EventsPage() {
                   <div className="flex flex-col md:flex-row gap-4">
                     <div className="md:w-48 h-32 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
                       <Image
-                        src={event.image || "/placeholder.svg"}
+                        src={`/${event.image}` || "/placeholder.svg"}
                         alt={event.title}
                         className="w-full h-full object-cover"
                         width={500}
@@ -450,7 +476,7 @@ export default function EventsPage() {
                         <span className="font-medium text-primary-600">{event.price}</span>
                       </div>
                       <Link
-                        href={`/events/${event.id}`}
+                        href={`/events/${event.slug}`}
                         className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200"
                       >
                         View Details
