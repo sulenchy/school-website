@@ -3,17 +3,6 @@ import Link from "next/link";
 import { use } from 'react';
 import { loadJsonContentBySlug } from '../../lib/loadJsonContent';
 
-type NewsItem = {
-  title: string;
-  excerpt:string;
-  content: string;
-  date: string;
-  category: string;
-  image: string;
-  author: string;
-  slug: string;
-}
-
 export default function NewsItem({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const newsItem = loadJsonContentBySlug('_contents/news', id)
