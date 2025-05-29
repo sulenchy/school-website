@@ -27,20 +27,20 @@ const slides: Slide[] = [
     subtitle: "",
     description: "At the meeting held few days to the 70th Anniversary",
   },
-  {
-    id: 3,
-    image: "/placeholder.svg?height=600&width=1200",
-    title: "Arts & Culture",
-    subtitle: "Creative Expression",
-    description: "Nurturing creativity through music, art, and performing arts programs",
-  },
-  {
-    id: 4,
-    image: "/placeholder.svg?height=600&width=1200",
-    title: "Sports Excellence",
-    subtitle: "Building Champions",
-    description: "Developing teamwork, leadership, and athletic skills",
-  },
+  // {
+  //   id: 3,
+  //   image: "/placeholder.svg?height=600&width=1200",
+  //   title: "Arts & Culture",
+  //   subtitle: "Creative Expression",
+  //   description: "Nurturing creativity through music, art, and performing arts programs",
+  // },
+  // {
+  //   id: 4,
+  //   image: "/placeholder.svg?height=600&width=1200",
+  //   title: "Sports Excellence",
+  //   subtitle: "Building Champions",
+  //   description: "Developing teamwork, leadership, and athletic skills",
+  // },
 ]
 
 export default function Slideshow() {

@@ -10,110 +10,12 @@ type GalleryItem = {
   src: string;
   description: string;
   date: string;
-  slug: string;
+  category: string;
+  tags: string[];
+  photographer: string,
+  alt: string;
+  slug: string
 };
-
-const images = [
-  {
-    id: "1",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "School building exterior",
-    title: "Main School Building",
-    description: "Our beautiful main building houses classrooms, administrative offices, and the library.",
-    category: "Campus",
-    tags: ["building", "exterior", "campus", "architecture"],
-    date: "2024-01-15",
-    photographer: "School Photography Club",
-  },
-  {
-    id: "2",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Students in classroom",
-    title: "Interactive Learning Session",
-    description: "Students engaged in collaborative learning in our modern classrooms.",
-    category: "Academics",
-    tags: ["students", "classroom", "learning", "collaboration", "education"],
-    date: "2024-01-20",
-    photographer: "Ms. Johnson",
-  },
-  {
-    id: "3",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Science laboratory",
-    title: "Advanced Science Lab",
-    description: "State-of-the-art laboratory equipment for hands-on scientific exploration.",
-    category: "Facilities",
-    tags: ["science", "laboratory", "equipment", "experiments", "STEM"],
-    date: "2024-01-18",
-    photographer: "Dr. Smith",
-  },
-  {
-    id: "4",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Sports field during game",
-    title: "Championship Game",
-    description: "Our varsity team competing in the regional championship.",
-    category: "Sports",
-    tags: ["sports", "field", "game", "championship", "athletics", "students"],
-    date: "2024-01-25",
-    photographer: "Athletics Department",
-  },
-  {
-    id: "5",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Library reading area",
-    title: "Modern Library Space",
-    description: "Comfortable reading areas with natural lighting and modern furniture.",
-    category: "Facilities",
-    tags: ["library", "reading", "books", "study", "quiet", "modern"],
-    date: "2024-01-12",
-    photographer: "Library Staff",
-  },
-  {
-    id: "6",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Art studio with student work",
-    title: "Creative Art Studio",
-    description: "Students' artwork displayed in our vibrant art studio.",
-    category: "Arts",
-    tags: ["art", "studio", "creativity", "paintings", "students", "artwork"],
-    date: "2024-01-22",
-    photographer: "Art Department",
-  },
-  {
-    id: "7",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Computer lab with students",
-    title: "Technology Center",
-    description: "Students learning coding and digital skills in our computer lab.",
-    category: "Academics",
-    tags: ["technology", "computers", "coding", "digital", "students", "learning"],
-    date: "2024-01-28",
-    photographer: "IT Department",
-  },
-  {
-    id: "8",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Cafeteria during lunch",
-    title: "Community Dining",
-    description: "Students enjoying healthy meals and socializing in our cafeteria.",
-    category: "Campus",
-    tags: ["cafeteria", "lunch", "food", "social", "community", "students"],
-    date: "2024-01-30",
-    photographer: "Cafeteria Staff",
-  },
-  {
-    id: "9",
-    src: "/placeholder.svg?height=400&width=600",
-    alt: "Music room with instruments",
-    title: "Music Performance Hall",
-    description: "Our music room equipped with various instruments for student performances.",
-    category: "Arts",
-    tags: ["music", "instruments", "performance", "band", "orchestra", "arts"],
-    date: "2024-02-02",
-    photographer: "Music Department",
-  },
-]
 
 const categories = ["All", "Campus", "Academics", "Facilities", "Sports", "Arts", "Events"]
 
@@ -140,7 +42,8 @@ export default function GalleryPage() {
 
   // Filter and search functionality
   const filteredImages = useMemo(() => {
-    let filtered = images
+    console.log('initial items ===> ', items)
+    let filtered = items
 
     // Filter by category
     if (selectedCategory !== "All") {
@@ -178,7 +81,7 @@ export default function GalleryPage() {
     })
 
     return filtered
-  }, [selectedCategory, searchQuery, sortBy, sortOrder])
+  }, [selectedCategory, searchQuery, sortBy, sortOrder, items])
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
@@ -400,7 +303,7 @@ export default function GalleryPage() {
           className="mb-6"
         >
           <p className="text-gray-600">
-            Showing {filteredImages.length} of {images.length} photos
+            Showing {filteredImages.length} of {items.length} photos
           </p>
         </motion.div>
 
@@ -421,15 +324,15 @@ export default function GalleryPage() {
               >
                 {filteredImages.map((image) => (
                   <motion.div
-                    key={image.id}
+                    key={image.slug}
                     variants={item}
                     className="relative group cursor-pointer bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
                     whileHover={{ y: -5 }}
-                    onClick={() => setSelectedImage(image.id)}
+                    onClick={() => setSelectedImage(image.slug)}
                   >
                     <div className="relative aspect-square overflow-hidden">
                       <Image
-                        src={items.length && `/${items[0].src}` || "/placeholder.svg"}
+                        src={`/${image.src}` || "/placeholder.svg"}
                         alt={image.alt}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -468,12 +371,12 @@ export default function GalleryPage() {
               <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
                 {filteredImages.map((image, index) => (
                   <motion.div
-                    key={image.id}
+                    key={image.slug}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="relative group cursor-pointer bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 break-inside-avoid mb-4"
-                    onClick={() => setSelectedImage(image.id)}
+                    onClick={() => setSelectedImage(image.slug)}
                   >
                     <div className="relative">
                       <Image
@@ -547,14 +450,14 @@ export default function GalleryPage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 {(() => {
-                  const image = images.find((img) => img.id === selectedImage)
+                  const image = items.find((img) => img.slug === selectedImage)
                   if (!image) return null
-
+                  console.log({image});
                   return (
                     <>
                       <div className="relative">
                         <Image
-                          src={image.src || "/placeholder.svg"}
+                          src={`/${image.src}` || "/placeholder.svg"}
                           alt={image.alt}
                           width={800}
                           height={600}

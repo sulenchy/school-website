@@ -235,6 +235,8 @@ export default function GalleryItem({ params }: { params: Promise<{ id: string }
                   <Image
                     src={relatedImage.src || "/placeholder.svg"}
                     alt={relatedImage.alt}
+                    width={1200}
+                    height={800}
                     layout="fill"
                     objectFit="cover"
                     className="transition-transform duration-300 group-hover:scale-110"

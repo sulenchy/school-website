@@ -171,6 +171,8 @@ export default function NewsPage() {
                   src={article.image || "/placeholder.svg"}
                   alt={article.title}
                   className="w-full h-full object-cover"
+                  width={1200}
+                  height={800}
                 />
                 <div className="absolute top-4 left-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
