@@ -234,6 +234,8 @@ export default function EventsPage() {
                       src={event.image || "/placeholder.svg"}
                       alt={event.title}
                       className="w-full h-full object-cover"
+                      width={500}
+                      height={300}
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -370,6 +372,8 @@ export default function EventsPage() {
                       src={event.image || "/placeholder.svg"}
                       alt={event.title}
                       className="w-full h-full object-cover"
+                      width={500}
+                      height={300}
                     />
                     <div className="absolute top-4 left-4 flex gap-2">
                       <span
@@ -422,6 +426,8 @@ export default function EventsPage() {
                         src={event.image || "/placeholder.svg"}
                         alt={event.title}
                         className="w-full h-full object-cover"
+                        width={500}
+                        height={300}
                       />
                     </div>
                     <div className="flex-1">

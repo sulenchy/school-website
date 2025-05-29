@@ -7,6 +7,10 @@ const newsItems = [
   { id: "3", title: "Parent-teacher conferences start next week" },
 ]
 
+const eventItems = [
+  {}
+]
+
 export default function Home() {
   return (
     <div className="space-y-12">
@@ -31,7 +35,7 @@ export default function Home() {
           ))}
         </ul>
         <div>
-            <Link href="/" className="text-secondary-600 hover:text-secondary-700 transition-colors">
+            <Link href="/news" className="text-secondary-600 hover:text-secondary-700 transition-colors">
             More News &rarr;
             </Link>
         </div>
