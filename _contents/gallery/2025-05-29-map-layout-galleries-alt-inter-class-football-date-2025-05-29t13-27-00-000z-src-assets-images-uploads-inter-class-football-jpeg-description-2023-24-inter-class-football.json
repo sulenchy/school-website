@@ -1,7 +1,13 @@
 {
-"layout": "galleries",
+"src": "assets/images/uploads/inter-class-football.jpeg",
+  "photographer": "The Principal",
   "alt": "Inter Class Football",
+  "layout": "galleries",
   "date": "2025-05-29T13:27:00.000Z",
-  "src": "assets/images/uploads/inter-class-football.jpeg",
-  "description": "2023/24 Inter Class football"
+  "title": "Inter Class Football",
+  "tags": [
+    "sport"
+  ],
+  "description": "2023/24 Inter Class football",
+  "category": "Sport"
 }
