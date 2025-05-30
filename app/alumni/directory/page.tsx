@@ -1,164 +1,164 @@
 "use client"
 
-import { useState, useMemo } from "react"
+// import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image"
+// import Image from "next/image"
 
 // This would typically come from a database or API
-const alumniDirectory = [
-  {
-    id: "1",
-    name: "Dr. Sarah Chen",
-    graduationYear: "2010",
-    currentPosition: "Chief Technology Officer",
-    company: "TechCorp Industries",
-    image: "/placeholder.svg?height=150&width=150",
-    field: "Technology",
-    location: "San Francisco, CA",
-    email: "sarah.chen@example.com",
-    linkedin: "linkedin.com/in/sarahchen",
-    bio: "Leading AI innovation in healthcare technology.",
-  },
-  {
-    id: "2",
-    name: "Marcus Rodriguez",
-    graduationYear: "2008",
-    currentPosition: "Olympic Gold Medalist",
-    company: "USA Swimming Team",
-    image: "/placeholder.svg?height=150&width=150",
-    field: "Sports",
-    location: "Colorado Springs, CO",
-    email: "marcus.rodriguez@example.com",
-    linkedin: "linkedin.com/in/marcusrodriguez",
-    bio: "Three-time Olympic gold medalist and swimming coach.",
-  },
-  {
-    id: "3",
-    name: "Dr. Emily Watson",
-    graduationYear: "2012",
-    currentPosition: "Pediatric Surgeon",
-    company: "Children's Hospital",
-    image: "/placeholder.svg?height=150&width=150",
-    field: "Healthcare",
-    location: "Boston, MA",
-    email: "emily.watson@example.com",
-    linkedin: "linkedin.com/in/emilywatson",
-    bio: "Specializing in minimally invasive pediatric surgery.",
-  },
-  {
-    id: "4",
-    name: "James Thompson",
-    graduationYear: "2015",
-    currentPosition: "Software Engineer",
-    company: "Google",
-    image: "/placeholder.svg?height=150&width=150",
-    field: "Technology",
-    location: "Mountain View, CA",
-    email: "james.thompson@example.com",
-    linkedin: "linkedin.com/in/jamesthompson",
-    bio: "Working on machine learning and AI systems.",
-  },
-  {
-    id: "5",
-    name: "Lisa Park",
-    graduationYear: "2009",
-    currentPosition: "Marketing Director",
-    company: "Creative Agency Inc.",
-    image: "/placeholder.svg?height=150&width=150",
-    field: "Business",
-    location: "New York, NY",
-    email: "lisa.park@example.com",
-    linkedin: "linkedin.com/in/lisapark",
-    bio: "Leading digital marketing strategies for Fortune 500 companies.",
-  },
-  {
-    id: "6",
-    name: "Michael Davis",
-    graduationYear: "2011",
-    currentPosition: "High School Principal",
-    company: "Lincoln High School",
-    image: "/placeholder.svg?height=150&width=150",
-    field: "Education",
-    location: "Chicago, IL",
-    email: "michael.davis@example.com",
-    linkedin: "linkedin.com/in/michaeldavis",
-    bio: "Dedicated to improving educational outcomes for all students.",
-  },
-]
+// const alumniDirectory = [
+//   {
+//     id: "1",
+//     name: "Dr. Sarah Chen",
+//     graduationYear: "2010",
+//     currentPosition: "Chief Technology Officer",
+//     company: "TechCorp Industries",
+//     image: "/placeholder.svg?height=150&width=150",
+//     field: "Technology",
+//     location: "San Francisco, CA",
+//     email: "sarah.chen@example.com",
+//     linkedin: "linkedin.com/in/sarahchen",
+//     bio: "Leading AI innovation in healthcare technology.",
+//   },
+//   {
+//     id: "2",
+//     name: "Marcus Rodriguez",
+//     graduationYear: "2008",
+//     currentPosition: "Olympic Gold Medalist",
+//     company: "USA Swimming Team",
+//     image: "/placeholder.svg?height=150&width=150",
+//     field: "Sports",
+//     location: "Colorado Springs, CO",
+//     email: "marcus.rodriguez@example.com",
+//     linkedin: "linkedin.com/in/marcusrodriguez",
+//     bio: "Three-time Olympic gold medalist and swimming coach.",
+//   },
+//   {
+//     id: "3",
+//     name: "Dr. Emily Watson",
+//     graduationYear: "2012",
+//     currentPosition: "Pediatric Surgeon",
+//     company: "Children's Hospital",
+//     image: "/placeholder.svg?height=150&width=150",
+//     field: "Healthcare",
+//     location: "Boston, MA",
+//     email: "emily.watson@example.com",
+//     linkedin: "linkedin.com/in/emilywatson",
+//     bio: "Specializing in minimally invasive pediatric surgery.",
+//   },
+//   {
+//     id: "4",
+//     name: "James Thompson",
+//     graduationYear: "2015",
+//     currentPosition: "Software Engineer",
+//     company: "Google",
+//     image: "/placeholder.svg?height=150&width=150",
+//     field: "Technology",
+//     location: "Mountain View, CA",
+//     email: "james.thompson@example.com",
+//     linkedin: "linkedin.com/in/jamesthompson",
+//     bio: "Working on machine learning and AI systems.",
+//   },
+//   {
+//     id: "5",
+//     name: "Lisa Park",
+//     graduationYear: "2009",
+//     currentPosition: "Marketing Director",
+//     company: "Creative Agency Inc.",
+//     image: "/placeholder.svg?height=150&width=150",
+//     field: "Business",
+//     location: "New York, NY",
+//     email: "lisa.park@example.com",
+//     linkedin: "linkedin.com/in/lisapark",
+//     bio: "Leading digital marketing strategies for Fortune 500 companies.",
+//   },
+//   {
+//     id: "6",
+//     name: "Michael Davis",
+//     graduationYear: "2011",
+//     currentPosition: "High School Principal",
+//     company: "Lincoln High School",
+//     image: "/placeholder.svg?height=150&width=150",
+//     field: "Education",
+//     location: "Chicago, IL",
+//     email: "michael.davis@example.com",
+//     linkedin: "linkedin.com/in/michaeldavis",
+//     bio: "Dedicated to improving educational outcomes for all students.",
+//   },
+// ]
 
-const fields = ["All", "Technology", "Healthcare", "Sports", "Business", "Education", "Arts"]
-const graduationYears = [
-  "All",
-  "2008",
-  "2009",
-  "2010",
-  "2011",
-  "2012",
-  "2013",
-  "2014",
-  "2015",
-  "2016",
-  "2017",
-  "2018",
-  "2019",
-  "2020",
-  "2021",
-  "2022",
-  "2023",
-]
+// const fields = ["All", "Technology", "Healthcare", "Sports", "Business", "Education", "Arts"]
+// const graduationYears = [
+//   "All",
+//   "2008",
+//   "2009",
+//   "2010",
+//   "2011",
+//   "2012",
+//   "2013",
+//   "2014",
+//   "2015",
+//   "2016",
+//   "2017",
+//   "2018",
+//   "2019",
+//   "2020",
+//   "2021",
+//   "2022",
+//   "2023",
+// ]
 
 export default function AlumniDirectory() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedField, setSelectedField] = useState("All")
-  const [selectedYear, setSelectedYear] = useState("All")
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
+//   const [searchQuery, setSearchQuery] = useState("")
+//   const [selectedField, setSelectedField] = useState("All")
+//   const [selectedYear, setSelectedYear] = useState("All")
+//   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
 
-  const filteredAlumni = useMemo(() => {
-    let filtered = alumniDirectory
+//   const filteredAlumni = useMemo(() => {
+//     let filtered = alumniDirectory
 
-    // Filter by field
-    if (selectedField !== "All") {
-      filtered = filtered.filter((alumni) => alumni.field === selectedField)
-    }
+//     // Filter by field
+//     if (selectedField !== "All") {
+//       filtered = filtered.filter((alumni) => alumni.field === selectedField)
+//     }
 
-    // Filter by graduation year
-    if (selectedYear !== "All") {
-      filtered = filtered.filter((alumni) => alumni.graduationYear === selectedYear)
-    }
+//     // Filter by graduation year
+//     if (selectedYear !== "All") {
+//       filtered = filtered.filter((alumni) => alumni.graduationYear === selectedYear)
+//     }
 
-    // Filter by search query
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
-      filtered = filtered.filter(
-        (alumni) =>
-          alumni.name.toLowerCase().includes(query) ||
-          alumni.company.toLowerCase().includes(query) ||
-          alumni.currentPosition.toLowerCase().includes(query) ||
-          alumni.location.toLowerCase().includes(query) ||
-          alumni.field.toLowerCase().includes(query),
-      )
-    }
+//     // Filter by search query
+//     if (searchQuery.trim()) {
+//       const query = searchQuery.toLowerCase()
+//       filtered = filtered.filter(
+//         (alumni) =>
+//           alumni.name.toLowerCase().includes(query) ||
+//           alumni.company.toLowerCase().includes(query) ||
+//           alumni.currentPosition.toLowerCase().includes(query) ||
+//           alumni.location.toLowerCase().includes(query) ||
+//           alumni.field.toLowerCase().includes(query),
+//       )
+//     }
 
-    return filtered
-  }, [selectedField, selectedYear, searchQuery])
+//     return filtered
+//   }, [selectedField, selectedYear, searchQuery])
 
-  const getFieldColor = (field: string) => {
-    const colors = {
-      Technology: "bg-blue-100 text-blue-600",
-      Healthcare: "bg-green-100 text-green-600",
-      Sports: "bg-orange-100 text-orange-600",
-      Business: "bg-purple-100 text-purple-600",
-      Education: "bg-primary-100 text-primary-600",
-      Arts: "bg-pink-100 text-pink-600",
-    }
-    return colors[field as keyof typeof colors] || "bg-gray-100 text-gray-600"
-  }
+//   const getFieldColor = (field: string) => {
+//     const colors = {
+//       Technology: "bg-blue-100 text-blue-600",
+//       Healthcare: "bg-green-100 text-green-600",
+//       Sports: "bg-orange-100 text-orange-600",
+//       Business: "bg-purple-100 text-purple-600",
+//       Education: "bg-primary-100 text-primary-600",
+//       Arts: "bg-pink-100 text-pink-600",
+//     }
+//     return colors[field as keyof typeof colors] || "bg-gray-100 text-gray-600"
+//   }
 
-  const clearFilters = () => {
-    setSelectedField("All")
-    setSelectedYear("All")
-    setSearchQuery("")
-  }
+//   const clearFilters = () => {
+//     setSelectedField("All")
+//     setSelectedYear("All")
+//     setSearchQuery("")
+//   }
 
   return (
     <div className="min-h-screen">

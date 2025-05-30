@@ -1,135 +1,135 @@
 "use client"
 
-import { useState } from "react"
+// import { useState } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image"
+// import Image from "next/image"
 import Link from "next/link"
 
 // This would typically come from a database or API
-const featuredAlumni = [
-  {
-    id: "1",
-    name: "Dr. Sarah Chen",
-    graduationYear: "2010",
-    currentPosition: "Chief Technology Officer",
-    company: "TechCorp Industries",
-    image: "/placeholder.svg?height=300&width=300",
-    achievement: "Led the development of revolutionary AI healthcare solutions",
-    quote: "Acme School gave me the foundation to think critically and pursue my passion for technology.",
-    field: "Technology",
-    location: "San Francisco, CA",
-  },
-  {
-    id: "2",
-    name: "Marcus Rodriguez",
-    graduationYear: "2008",
-    currentPosition: "Olympic Gold Medalist",
-    company: "USA Swimming Team",
-    image: "/placeholder.svg?height=300&width=300",
-    achievement: "Won 3 Olympic gold medals in swimming",
-    quote: "The discipline and teamwork I learned at Acme School carried me to Olympic success.",
-    field: "Sports",
-    location: "Colorado Springs, CO",
-  },
-  {
-    id: "3",
-    name: "Dr. Emily Watson",
-    graduationYear: "2012",
-    currentPosition: "Pediatric Surgeon",
-    company: "Children's Hospital",
-    image: "/placeholder.svg?height=300&width=300",
-    achievement: "Pioneered minimally invasive surgical techniques for children",
-    quote: "The science program at Acme School inspired my journey into medicine.",
-    field: "Healthcare",
-    location: "Boston, MA",
-  },
-]
+// const featuredAlumni = [
+//   {
+//     id: "1",
+//     name: "Dr. Sarah Chen",
+//     graduationYear: "2010",
+//     currentPosition: "Chief Technology Officer",
+//     company: "TechCorp Industries",
+//     image: "/placeholder.svg?height=300&width=300",
+//     achievement: "Led the development of revolutionary AI healthcare solutions",
+//     quote: "Acme School gave me the foundation to think critically and pursue my passion for technology.",
+//     field: "Technology",
+//     location: "San Francisco, CA",
+//   },
+//   {
+//     id: "2",
+//     name: "Marcus Rodriguez",
+//     graduationYear: "2008",
+//     currentPosition: "Olympic Gold Medalist",
+//     company: "USA Swimming Team",
+//     image: "/placeholder.svg?height=300&width=300",
+//     achievement: "Won 3 Olympic gold medals in swimming",
+//     quote: "The discipline and teamwork I learned at Acme School carried me to Olympic success.",
+//     field: "Sports",
+//     location: "Colorado Springs, CO",
+//   },
+//   {
+//     id: "3",
+//     name: "Dr. Emily Watson",
+//     graduationYear: "2012",
+//     currentPosition: "Pediatric Surgeon",
+//     company: "Children's Hospital",
+//     image: "/placeholder.svg?height=300&width=300",
+//     achievement: "Pioneered minimally invasive surgical techniques for children",
+//     quote: "The science program at Acme School inspired my journey into medicine.",
+//     field: "Healthcare",
+//     location: "Boston, MA",
+//   },
+// ]
 
-const alumniStats = [
-  { label: "Total Alumni", value: "15,000+" },
-  { label: "Countries Worldwide", value: "45" },
-  { label: "Fortune 500 CEOs", value: "12" },
-  { label: "Average Starting Salary", value: "$75,000" },
-]
+// const alumniStats = [
+//   { label: "Total Alumni", value: "15,000+" },
+//   { label: "Countries Worldwide", value: "45" },
+//   { label: "Fortune 500 CEOs", value: "12" },
+//   { label: "Average Starting Salary", value: "$75,000" },
+// ]
 
-const upcomingEvents = [
-  {
-    id: "1",
-    title: "Annual Alumni Gala",
-    date: "2024-06-15",
-    time: "6:00 PM - 10:00 PM",
-    location: "Grand Ballroom, Downtown Hotel",
-    description: "Join us for an evening of celebration, networking, and reconnecting with fellow alumni.",
-    image: "/placeholder.svg?height=200&width=400",
-  },
-  {
-    id: "2",
-    title: "Career Mentorship Program Launch",
-    date: "2024-05-20",
-    time: "2:00 PM - 4:00 PM",
-    location: "School Auditorium",
-    description: "Connect experienced alumni with current students for career guidance and mentorship.",
-    image: "/placeholder.svg?height=200&width=400",
-  },
-  {
-    id: "3",
-    title: "Alumni Business Network Mixer",
-    date: "2024-07-10",
-    time: "5:30 PM - 8:00 PM",
-    location: "Innovation Hub, Tech District",
-    description: "Network with alumni entrepreneurs and business leaders in a casual setting.",
-    image: "/placeholder.svg?height=200&width=400",
-  },
-]
+// const upcomingEvents = [
+//   {
+//     id: "1",
+//     title: "Annual Alumni Gala",
+//     date: "2024-06-15",
+//     time: "6:00 PM - 10:00 PM",
+//     location: "Grand Ballroom, Downtown Hotel",
+//     description: "Join us for an evening of celebration, networking, and reconnecting with fellow alumni.",
+//     image: "/placeholder.svg?height=200&width=400",
+//   },
+//   {
+//     id: "2",
+//     title: "Career Mentorship Program Launch",
+//     date: "2024-05-20",
+//     time: "2:00 PM - 4:00 PM",
+//     location: "School Auditorium",
+//     description: "Connect experienced alumni with current students for career guidance and mentorship.",
+//     image: "/placeholder.svg?height=200&width=400",
+//   },
+//   {
+//     id: "3",
+//     title: "Alumni Business Network Mixer",
+//     date: "2024-07-10",
+//     time: "5:30 PM - 8:00 PM",
+//     location: "Innovation Hub, Tech District",
+//     description: "Network with alumni entrepreneurs and business leaders in a casual setting.",
+//     image: "/placeholder.svg?height=200&width=400",
+//   },
+// ]
 
-const newsUpdates = [
-  {
-    id: "1",
-    title: "Alumni Scholarship Fund Reaches $1 Million",
-    date: "2024-01-15",
-    excerpt: "Thanks to generous alumni donations, our scholarship fund has reached a major milestone.",
-    image: "/placeholder.svg?height=150&width=250",
-  },
-  {
-    id: "2",
-    title: "Class of 2014 Reunion Planning Underway",
-    date: "2024-01-10",
-    excerpt: "The 10-year reunion committee is planning an exciting weekend of activities.",
-    image: "/placeholder.svg?height=150&width=250",
-  },
-  {
-    id: "3",
-    title: "New Alumni Directory Platform Launched",
-    date: "2024-01-05",
-    excerpt: "Connect with fellow graduates through our new online alumni directory.",
-    image: "/placeholder.svg?height=150&width=250",
-  },
-]
+// const newsUpdates = [
+//   {
+//     id: "1",
+//     title: "Alumni Scholarship Fund Reaches $1 Million",
+//     date: "2024-01-15",
+//     excerpt: "Thanks to generous alumni donations, our scholarship fund has reached a major milestone.",
+//     image: "/placeholder.svg?height=150&width=250",
+//   },
+//   {
+//     id: "2",
+//     title: "Class of 2014 Reunion Planning Underway",
+//     date: "2024-01-10",
+//     excerpt: "The 10-year reunion committee is planning an exciting weekend of activities.",
+//     image: "/placeholder.svg?height=150&width=250",
+//   },
+//   {
+//     id: "3",
+//     title: "New Alumni Directory Platform Launched",
+//     date: "2024-01-05",
+//     excerpt: "Connect with fellow graduates through our new online alumni directory.",
+//     image: "/placeholder.svg?height=150&width=250",
+//   },
+// ]
 
 export default function AlumniPage() {
-  const [selectedField, setSelectedField] = useState("All")
-  const fields = ["All", "Technology", "Healthcare", "Sports", "Business", "Education", "Arts"]
+//   const [selectedField, setSelectedField] = useState("All")
+//   const fields = ["All", "Technology", "Healthcare", "Sports", "Business", "Education", "Arts"]
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    })
-  }
+//   const formatDate = (dateString: string) => {
+//     const date = new Date(dateString)
+//     return date.toLocaleDateString("en-US", {
+//       month: "long",
+//       day: "numeric",
+//       year: "numeric",
+//     })
+//   }
 
-  const getFieldColor = (field: string) => {
-    const colors = {
-      Technology: "bg-blue-100 text-blue-600",
-      Healthcare: "bg-green-100 text-green-600",
-      Sports: "bg-orange-100 text-orange-600",
-      Business: "bg-purple-100 text-purple-600",
-      Education: "bg-primary-100 text-primary-600",
-      Arts: "bg-pink-100 text-pink-600",
-    }
-    return colors[field as keyof typeof colors] || "bg-gray-100 text-gray-600"
-  }
+//   const getFieldColor = (field: string) => {
+//     const colors = {
+//       Technology: "bg-blue-100 text-blue-600",
+//       Healthcare: "bg-green-100 text-green-600",
+//       Sports: "bg-orange-100 text-orange-600",
+//       Business: "bg-purple-100 text-purple-600",
+//       Education: "bg-primary-100 text-primary-600",
+//       Arts: "bg-pink-100 text-pink-600",
+//     }
+//     return colors[field as keyof typeof colors] || "bg-gray-100 text-gray-600"
+//   }
 
   return (
     <div className="min-h-screen">
